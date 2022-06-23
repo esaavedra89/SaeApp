@@ -86,5 +86,15 @@ namespace SaeApp.View.Modules.Inventory
                 Tools.DisplayAlert(exc.Message);
             }
         }
+
+        private void btnSearch_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

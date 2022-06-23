@@ -14,8 +14,8 @@
                 HorizontalOptions="Center">
                 <ImageButton
                     Clicked="btnEdit_Clicked"
-                    Source="ic_create"
                     HorizontalOptions="CenterAndExpand"
+                    Source="ic_create"
                     x:Name="btnEdit"/>
                 <ImageButton
                     Clicked="btnSave_Clicked"

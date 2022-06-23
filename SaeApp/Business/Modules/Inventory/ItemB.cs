@@ -1,5 +1,6 @@
 ﻿using SaeApp.DataAccess.Modules.Inventory;
 using SaeApp.Model.Modules.Inventory;
+using SaeApp.Model.Modules.System.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,8 +13,33 @@ namespace SaeApp.Business.Modules.Inventory
         /// <summary>
         /// Método para ejecutar lógica de negocio antes de ejecutar la operación Guardar.
         /// </summary>
-        private void PreGuardar(Item objItem, ItemDAO objItemDAO)
+        public async Task<Response> PreSave(Item objItem, ItemDAO objItemDAO)
         {
+            try
+            {
+                Response objResponse = new Response();
+                if (objItem == null)
+                    objResponse.UnsuccessfulResponse(404, "El ítem es nulo");
+                else
+                {
+                    if (objItem.IdItem == 0)
+                    {
+                         Item query = await GetItemAsync(objItem.Internalcode, objItem.IdCompany).ConfigureAwait(false);
+                        if (query != null)
+                            objResponse.UnsuccessfulResponse(403, "Código existente");
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                return objResponse;
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
         }
 
         /// <summary>
@@ -92,7 +118,7 @@ namespace SaeApp.Business.Modules.Inventory
         /// Obtiene la lista de Items para una empresa.
         /// </summary>
         /// <param name="idRutaTransporte">Id de la ruta de transporte.</param>
-        public async Task<Item> GetItemAsync(int idItem)
+        public async Task<Item> GetItemAsync(int idItem, int idCompany)
         {
             try
             {
@@ -100,7 +126,27 @@ namespace SaeApp.Business.Modules.Inventory
                 ItemDAO objItemDAO = await ItemDAO.Instance;
 
                 // Realizamos la operación en la base de datos.
-                return await objItemDAO.GetItemAsync(idItem).ConfigureAwait(false);
+                return await objItemDAO.GetItemAsync(idItem, idCompany).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene la lista de Items para una empresa.
+        /// </summary>
+        /// <param name="idRutaTransporte">Id de la ruta de transporte.</param>
+        public async Task<Item> GetItemAsync(string code, int idCompany)
+        {
+            try
+            {
+                // Objeto DAO.
+                ItemDAO objItemDAO = await ItemDAO.Instance;
+
+                // Realizamos la operación en la base de datos.
+                return await objItemDAO.GetItemAsync(code, idCompany).ConfigureAwait(false);
             }
             catch (Exception e)
             {

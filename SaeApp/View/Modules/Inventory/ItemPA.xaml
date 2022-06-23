@@ -19,7 +19,7 @@
                 VerticalOptions="CenterAndExpand">
                 <StackLayout
                     Orientation="Horizontal"
-                    HorizontalOptions="Center">
+                    HorizontalOptions="FillAndExpand">
                     <Entry
                         HorizontalOptions="Center"
                         Placeholder="Código"
@@ -28,11 +28,18 @@
                     <Entry
                         HorizontalOptions="Center"
                         Placeholder="Ítem"
-                        WidthRequest="100"
+                        WidthRequest="150"
                         x:Name="itemName"/>
-                    <Button
-                        HorizontalOptions="Center"
-                        Text="Buscar"/>
+                    <ImageButton
+                        Clicked="btnSearch_Clicked"
+                        HorizontalOptions="StartAndExpand"
+                        Source="ic_search"
+                        x:Name="btnSearch"/>
+                    <ImageButton
+                        Clicked="btnAdd_Clicked"
+                        HorizontalOptions="End"
+                        Source="ic_add"
+                        x:Name="btnAdd"/>
                 </StackLayout>
                 
                 <StackLayout

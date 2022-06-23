@@ -26,9 +26,14 @@ namespace SaeApp.DataAccess.Modules.Inventory
             return Database.Table<Item>().ToListAsync();
         }
 
-        public Task<Item> GetItemAsync(int idItem)
+        public Task<Item> GetItemAsync(int idItem, int idCompany)
         {
-            return Database.Table<Item>().Where(i => i.IdItem == idItem).FirstOrDefaultAsync();
+            return Database.Table<Item>().Where(i => i.IdItem == idItem && i.IdCompany == idCompany).FirstOrDefaultAsync();
+        }
+
+        public Task<Item> GetItemAsync(string code, int idCompany)
+        {
+            return Database.Table<Item>().Where(i => i.Internalcode == code && i.IdCompany == idCompany).FirstOrDefaultAsync();
         }
 
         public Task<int> SaveItemAsync(Item item)
