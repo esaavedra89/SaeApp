@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:customs="clr-namespace:SaeApp.Resources.CustomControls"
+             mc:Ignorable="d"
+             x:Class="SaeApp.View.Modules.SAE.LateralMenu"
+             Title="Menú">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <!--<Image
+                    HeightRequest="70"
+                    Margin="0,10,0,0"
+                    Source="user.png"/>
+                <Label 
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Empresa}"
+                    TextColor="White"
+                    VerticalTextAlignment="Start">
+                    <Label.FontSize>
+                        <OnIdiom 
+                            x:TypeArguments="x:Double"
+                            Phone="20"
+                            Tablet="22"/>
+                    </Label.FontSize>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding CambiarURLCommand}" NumberOfTapsRequired="2"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    HorizontalTextAlignment="Center"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Local}"
+                    TextColor="White"
+                    VerticalTextAlignment="Start">
+                    <Label.FontSize>
+                        <OnIdiom 
+                            x:TypeArguments="x:Double"
+                            Phone="18"
+                            Tablet="20"/>
+                    </Label.FontSize>
+                </Label>
+                <Label
+                    HorizontalTextAlignment="Center"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Correo}"
+                    TextColor="White"
+                    VerticalTextAlignment="Center">
+                    <Label.FontSize>
+                        <OnIdiom 
+                            x:TypeArguments="x:Double"
+                            Phone="18"
+                            Tablet="20"/>
+                    </Label.FontSize>
+                </Label>
+                <Label
+                    HorizontalTextAlignment="Center"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding NombreCompleto}"
+                    TextColor="White"
+                    VerticalTextAlignment="Center">
+                    <Label.FontSize>
+                        <OnIdiom 
+                            x:TypeArguments="x:Double"
+                            Phone="18"
+                            Tablet="20"/>
+                    </Label.FontSize>
+
+                </Label>
+                <BoxView
+                    HeightRequest="1" 
+                    BackgroundColor="LightGray" 
+                    HorizontalOptions="FillAndExpand" />-->
+                <!--HeightRequest="{Binding HeighListView}"-->
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand">
+                    <ListView 
+                        x:Name="menuList">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <!--Row #0-->
+                                            <RowDefinition 
+                                                Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <customs:ButtonAlignment
+                                            Style="{StaticResource botonLista}"
+                                            BackgroundColor="#232222"
+                                            Clicked="ButtonAlignment_Clicked"
+                                            Grid.Column="0"
+                                            Grid.Row="0"
+                                            HorizontalTextAlignment="Start"
+                                            Text="{Binding Nombre}"
+                                            VerticalTextAlignment="Center">
+                                            <customs:ButtonAlignment.FontSize>
+                                                <OnIdiom
+                                                    x:TypeArguments="x:Double"
+                                                    Phone="18"
+                                                    Tablet="20"/>
+                                            </customs:ButtonAlignment.FontSize>
+                                        </customs:ButtonAlignment>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

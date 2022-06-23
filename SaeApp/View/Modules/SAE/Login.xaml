@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SaeApp.View.Modules.SAE.Login">
+    <ContentPage.Content>
+        <StackLayout
+            HeightRequest="600"
+            Margin="40,60,40,60">
+            <Image 
+                Source="xamarinlogo"
+                HorizontalOptions="Center">
+                <Image.HeightRequest>
+                    <OnIdiom
+                        x:TypeArguments="x:Double"
+                        Phone="100"
+                        Tablet="120"/>
+                </Image.HeightRequest>
+            </Image>
+            <Label
+                FontSize="30"
+                TextColor="Blue"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,20,0,0"
+                Text="Class App"
+                VerticalOptions="Start"/>
+            <Entry
+               HorizontalOptions="Fill"
+                Margin="0,20"
+                Placeholder="Usuario"
+                VerticalOptions="Start"
+                Text="{Binding Login}"
+                x:Name="login"/>
+            <Entry
+               HorizontalOptions="Fill"
+               Margin="0,20"
+               Placeholder="Contraseña"
+               VerticalOptions="Start"
+               Text="{Binding Contrasenna}"
+               IsPassword="True"
+               x:Name="password"/>
+
+            <Button
+                BackgroundColor="Blue"
+                Text="Enviar"
+                TextColor="White"
+                FontAttributes="Bold"
+                FontSize="20"
+                Margin="0,20"
+                VerticalOptions="Start"
+                HorizontalOptions="Fill"
+                Clicked="Button_Clicked_1"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:customs="clr-namespace:SaeApp.Resources.CustomControls"
+             x:Class="SaeApp.View.Modules.SAE.ModuleOption">
+    <NavigationPage.TitleView>
+        <StackLayout 
+            Orientation="Horizontal" 
+            Spacing="10"
+            VerticalOptions="Center">
+            <Label 
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="Start"
+                LineBreakMode="TailTruncation"
+                Text="{Binding NombreSeccion}"
+                TextColor="White"
+                VerticalTextAlignment="Center"
+                x:Name="sectionName"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Command="{Binding HomeCommand}"
+            Icon="ic_home_white.png"
+            Order="Primary"
+            Priority="0"
+            x:Name="Home"/>
+        <ToolbarItem 
+            Command="{Binding PerfilCommand}"
+            Order="Secondary"
+            Priority="0"
+            Text="Perfil"
+            x:Name="Perfil"/>
+        <ToolbarItem 
+            Command="{Binding CerrarSesionAppCommand}"
+            Order="Secondary"
+            Priority="1"
+            Text="Salir"
+            x:Name="SalirApp"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand">
+            <ScrollView
+                AbsoluteLayout.LayoutFlags="All" 
+                AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout
+                    x:Name="stklPadre">
+                    <BoxView 
+                        BackgroundColor="White" 
+                        HeightRequest="3" 
+                        Margin="3,0,3,0"/>
+                    <!--<Grid
+                        IsVisible="True">
+                        <StackLayout
+                            BackgroundColor="#800f2f68"
+                            Margin="10"
+                            x:Name="TopBoxGestion"/>
+                        <StackLayout
+                            HorizontalOptions="Center"
+                            Orientation="Horizontal">
+                            <Image
+                                HeightRequest="70" 
+                                HorizontalOptions="Center"
+                                Margin="0" 
+                                Source="ic_Gestion_Orange.png"
+                                VerticalOptions="Center"/>
+                            <Label
+                                FontSize="Large"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding Gestion}"
+                                TextColor="#F37053"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"
+                                x:Name="gestion"/>
+                        </StackLayout>
+                    </Grid>-->
+                    <!--IsVisible="{Binding IsVisibleGestion}"-->
+                    <Grid>
+                        <StackLayout
+                            BackgroundColor="#800f2f68"
+                            Margin="10"
+                            Padding="20"
+                            x:Name="CenterBoxGestion"/>
+                        <StackLayout
+                            VerticalOptions="FillAndExpand"
+                            x:Name="ListaGestion">
+                            <!--HeightRequest="{Binding HeighListViewGestion}"-->
+                            <ListView 
+                                Margin="20,5,20,5"
+                                x:Name="listaGestion">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid
+                                                Margin="0">
+                                                <Grid.RowDefinitions>
+                                                    <!--Row #0-->
+                                                    <RowDefinition 
+                                                        Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <customs:ButtonAlignment
+                                                    Style="{StaticResource botonLista}"
+                                                    Clicked="ButtonAlignment_Clicked"
+                                                    Grid.Column="0"
+                                                    Grid.Row="0"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Nombre}"
+                                                    VerticalTextAlignment="Center">
+                                                    <customs:ButtonAlignment.FontSize>
+                                                        <OnIdiom
+                                                            x:TypeArguments="x:Double"
+                                                            Phone="18"
+                                                            Tablet="20"/>
+                                                    </customs:ButtonAlignment.FontSize>
+                                                </customs:ButtonAlignment>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Grid>
+                    <!--<Grid
+                        IsVisible="{Binding IsVisibleConfiguracion}">
+                        <StackLayout
+                            BackgroundColor="#800f2f68"
+                            Margin="10"
+                            x:Name="TopBox"/>
+                        <StackLayout
+                            HorizontalOptions="Center"
+                            Orientation="Horizontal">
+                            <Image
+                                HeightRequest="70" 
+                                HorizontalOptions="Center"
+                                Margin="0" 
+                                Source="ic_settings_Orange.png"
+                                VerticalOptions="Center"/>
+                            <Label
+                                FontFamily="{StaticResource FontelloCustom}"
+                                FontSize="Large"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding Configuracion}"
+                                TextColor="#F37053"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Grid>
+                    <Grid
+                        IsVisible="{Binding IsVisibleConfiguracion}">
+                        <StackLayout
+                            BackgroundColor="#800f2f68"
+                            Margin="10"
+                            Padding="20"
+                            x:Name="CenterBox"/>
+                        <StackLayout
+                            VerticalOptions="FillAndExpand"
+                            x:Name="ListaConfiguracion">
+                            <ListView 
+                                HeightRequest="{Binding HeighListViewConfiguracion}"
+                                IsEnabled="{Binding IsEnabled}"
+                                ItemsSource="{Binding ListaConfiguracion}"
+                                Margin="20,5,20,5"
+                                x:Name="listaConfiguracion">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid
+                                                Margin="0">
+                                                <Grid.RowDefinitions>
+                                                    --><!--Row #0--><!--
+                                                    <RowDefinition 
+                                                        Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <customs:ButtonAlignment
+                                                    Style="{StaticResource botonLista}"
+                                                    Clicked="btnGestion_Tapped"
+                                                    FontFamily="{StaticResource FontelloCustom}"
+                                                    Grid.Column="0"
+                                                    Grid.Row="0"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding TextAndIcon}"
+                                                    VerticalTextAlignment="Center">
+                                                    <customs:ButtonAlignment.FontSize>
+                                                        <OnIdiom
+                                                            x:TypeArguments="x:Double"
+                                                            Phone="18"
+                                                            Tablet="20"/>
+                                                    </customs:ButtonAlignment.FontSize>
+                                                </customs:ButtonAlignment>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Grid>
+                    <Grid
+                        IsVisible="{Binding IsVisibleReportes}">
+                        <StackLayout
+                            BackgroundColor="#800f2f68"
+                            Margin="10"
+                            x:Name="TopBoxReportes"/>
+                        <StackLayout
+                            HorizontalOptions="Center"
+                            Orientation="Horizontal">
+                            <Image
+                                HeightRequest="70" 
+                                HorizontalOptions="Center"
+                                Margin="0" 
+                                Source="ic_wallet_Orange.png"
+                                VerticalOptions="Center"/>
+                            <Label
+                                FontFamily="{StaticResource FontelloCustom}"
+                                FontSize="Large"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding Reportes}"
+                                TextColor="#F37053"
+                                VerticalOptions="Center"
+                                VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Grid>
+                    <Grid
+                        IsVisible="{Binding IsVisibleReportes}">
+                        <StackLayout
+                            BackgroundColor="#800f2f68"
+                            Margin="10"
+                            Padding="20"
+                            x:Name="CenterBoxReportes"/>
+                        <StackLayout
+                            VerticalOptions="FillAndExpand"
+                            x:Name="ListaReportes">
+                            <ListView 
+                                HeightRequest="{Binding HeighListViewReportes}"
+                                IsEnabled="{Binding IsEnabled}"
+                                ItemsSource="{Binding ListaReportes}"
+                                Margin="20,5,20,5"
+                                x:Name="listaReportes">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid
+                                                Margin="0">
+                                                <Grid.RowDefinitions>
+                                                    --><!--Row #0--><!--
+                                                    <RowDefinition 
+                                                        Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <customs:ButtonAlignment
+                                                    Style="{StaticResource botonLista}"
+                                                    Clicked="btnGestion_Tapped"
+                                                    Grid.Column="0"
+                                                    Grid.Row="0"
+                                                    FontFamily="{StaticResource FontelloCustom}"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding TextAndIcon}"
+                                                    VerticalTextAlignment="Center">
+                                                    <customs:ButtonAlignment.FontSize>
+                                                        <OnIdiom
+                                                            x:TypeArguments="x:Double"
+                                                            Phone="18"
+                                                            Tablet="20"/>
+                                                    </customs:ButtonAlignment.FontSize>
+                                                </customs:ButtonAlignment>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Grid>-->
+                    <!--FooterApp-->
+                    <StackLayout 
+                        BackgroundColor="#323538"
+                        VerticalOptions="EndAndExpand">
+                        <Label 
+                            BackgroundColor="#323538"
+                            HorizontalTextAlignment="Center" 
+                            Text="www.sae.com - (412) 1897161"
+                            TextColor="White" 
+                            VerticalOptions="Center">
+                            <Label.HeightRequest>
+                                <OnIdiom
+                                    x:TypeArguments="x:Double"
+                                    Phone="17"
+                                    Tablet="25"/>
+                            </Label.HeightRequest>
+                            <Label.FontSize>
+                                <OnIdiom
+                                    x:TypeArguments="x:Double"
+                                    Phone="14"
+                                    Tablet="16"/>
+                            </Label.FontSize>
+                        </Label>
+                        <Label 
+                            BackgroundColor="#323538"
+                            HorizontalTextAlignment="Center"
+                            Margin="0,-5,0,3"
+                            Text="Todos los derechos reservados"
+                            TextColor="White"
+                            VerticalOptions="CenterAndExpand">
+                            <Label.HeightRequest>
+                                <OnIdiom
+                                    x:TypeArguments="x:Double"
+                                    Phone="17"
+                                    Tablet="25"/>
+                            </Label.HeightRequest>
+                            <Label.FontSize>
+                                <OnIdiom
+                                    x:TypeArguments="x:Double"
+                                    Phone="14"
+                                    Tablet="16"/>
+                            </Label.FontSize>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout 
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                IsVisible="{Binding Busy}" 
+                Padding="12"
+                x:Name="busy">
+                <Image
+                    HeightRequest="70"
+                    Source="ic_autorenew.png"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
