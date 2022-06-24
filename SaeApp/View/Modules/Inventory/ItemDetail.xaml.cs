@@ -1,5 +1,7 @@
-﻿using SaeApp.DataAccess.Modules.Inventory;
+﻿using SaeApp.Business.Modules.Inventory;
+using SaeApp.DataAccess.Modules.Inventory;
 using SaeApp.Model.Modules.Inventory;
+using SaeApp.Model.Modules.System.Entity;
 using SaeApp.Model.Modules.System.Secutiry;
 using SaeApp.Resources;
 using System;
@@ -77,6 +79,7 @@ namespace SaeApp.View.Modules.Inventory
             {
                 _costPrice = value;
                 OnPropertyChanged("CostPrice");
+                UpdateValues();
             }
         }
         public decimal ProfitPercentage
@@ -86,6 +89,7 @@ namespace SaeApp.View.Modules.Inventory
             {
                 _profitPercentage = value;
                 OnPropertyChanged("ProfitPercentage");
+                UpdateValues();
             }
         }
         public decimal UnitPrice
@@ -151,7 +155,7 @@ namespace SaeApp.View.Modules.Inventory
                 OnPropertyChanged("BrandList");
             }
         }
-        public Item ObjItem { get; set; }
+        public Item ObjItem { get; set; } = new Item();
 
         #endregion
 
@@ -184,6 +188,22 @@ namespace SaeApp.View.Modules.Inventory
                 List<Brand> objBrandList = await database.GetItemsAsync().ConfigureAwait(false);
                 if (objBrandList.Count > 0)
                     this.BrandList = objBrandList;
+
+                objBrandList.Add(new Brand 
+                {
+                    IdBrand = 1,
+                    Name = "Huda beauty",
+                    IdCompany = 1,
+                });
+
+                objBrandList.Add(new Brand
+                {
+                    IdBrand = 2,
+                    Name = "Win Colors",
+                    IdCompany = 1,
+                });
+
+                this.BrandList = objBrandList;
 
                 if (objSelected != null)
                 {
@@ -256,7 +276,28 @@ namespace SaeApp.View.Modules.Inventory
         {
             try
             {
-                var objItem = (ItemDetail)BindingContext;
+                ItemDetail objItemDetail = (ItemDetail)BindingContext;
+
+                this.ObjItem.Internalcode = objItemDetail.Internalcode;
+                this.ObjItem.Name = objItemDetail.Name;
+                this.ObjItem.Description = objItemDetail.Description;
+                this.ObjItem.IdBrand = (objItemDetail.BrandSelected == null ? 0 : objItemDetail.BrandSelected.IdBrand);
+                this.ObjItem.CostPrice = objItemDetail.CostPrice;
+                this.ObjItem.ProfitPercentage = objItemDetail.ProfitPercentage;
+                this.ObjItem.UnitPrice = objItemDetail.UnitPrice;
+                this.ObjItem.ProfitAmount = objItemDetail.ProfitAmount;
+                this.ObjItem.SellPrice = objItemDetail.SellPrice;
+
+                ItemB objItemB = new ItemB();
+
+                Response objResponse = await objItemB.Save(this.ObjItem).ConfigureAwait(false);
+                if (objResponse.Valid)
+                {
+                    this.ObjItem.IdItem = objResponse.Code;
+                    Tools.DisplayAlert("Guardado con exito");
+                }
+                else
+                    Tools.DisplayAlert(objResponse.Message);
             }
             catch (Exception exc)
             {
@@ -269,6 +310,25 @@ namespace SaeApp.View.Modules.Inventory
             try
             {
                 await Application.Current.MainPage.Navigation.PopAsync();
+            }
+            catch (Exception exc)
+            {
+                Tools.DisplayAlert("Ha ocurrido un error: " + exc.Message);
+            }
+        }
+
+        void UpdateValues()
+        {
+            try
+            {
+                if (this.ProfitPercentage > 0 && this.CostPrice > 0)
+                {
+                    this.ProfitAmount = this.CostPrice * (this.ProfitPercentage / 100);
+
+                    this.UnitPrice = this.CostPrice + this.ProfitAmount;
+
+                    this.SellPrice = this.UnitPrice;
+                }
             }
             catch (Exception exc)
             {

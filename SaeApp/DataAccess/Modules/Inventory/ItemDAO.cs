@@ -23,34 +23,69 @@ namespace SaeApp.DataAccess.Modules.Inventory
 
         public Task<List<Item>> GetItemsAsync()
         {
-            return Database.Table<Item>().ToListAsync();
+            try
+            {
+                return Database.Table<Item>().ToListAsync();
+            }
+            catch (global::System.Exception exc)
+            {
+                throw exc;
+            }
         }
 
         public Task<Item> GetItemAsync(int idItem, int idCompany)
         {
-            return Database.Table<Item>().Where(i => i.IdItem == idItem && i.IdCompany == idCompany).FirstOrDefaultAsync();
+            try
+            {
+                return Database.Table<Item>().Where(i => i.IdItem == idItem && i.IdCompany == idCompany).FirstOrDefaultAsync();
+            }
+            catch (global::System.Exception exc)
+            {
+                throw exc;
+            }
         }
 
         public Task<Item> GetItemAsync(string code, int idCompany)
         {
-            return Database.Table<Item>().Where(i => i.Internalcode == code && i.IdCompany == idCompany).FirstOrDefaultAsync();
+            try
+            {
+                return Database.Table<Item>().Where(i => i.Internalcode == code && i.IdCompany == idCompany).FirstOrDefaultAsync();
+            }
+            catch (global::System.Exception exc)
+            {
+                throw exc;
+            }
         }
 
         public Task<int> SaveItemAsync(Item item)
         {
-            if (item.IdItem > 0)
+            try
             {
-                return Database.UpdateAsync(item);
+                if (item.IdItem > 0)
+                {
+                    return Database.UpdateAsync(item);
+                }
+                else
+                {
+                    return Database.InsertAsync(item);
+                }
             }
-            else
+            catch (global::System.Exception exc)
             {
-                return Database.InsertAsync(item);
+                throw exc;
             }
         }
 
         public Task<int> DeleteItemAsync(Item item)
         {
-            return Database.DeleteAsync(item);
+            try
+            {
+                return Database.DeleteAsync(item);
+            }
+            catch (global::System.Exception exc)
+            {
+                throw exc;
+            }
         }
     }
 }

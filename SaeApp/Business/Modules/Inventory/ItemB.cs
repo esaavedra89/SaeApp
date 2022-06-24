@@ -13,26 +13,67 @@ namespace SaeApp.Business.Modules.Inventory
         /// <summary>
         /// Método para ejecutar lógica de negocio antes de ejecutar la operación Guardar.
         /// </summary>
-        public async Task<Response> PreSave(Item objItem, ItemDAO objItemDAO)
+        public async Task<Response> PreSave(Item objItem)
         {
             try
             {
                 Response objResponse = new Response();
                 if (objItem == null)
-                    objResponse.UnsuccessfulResponse(404, "El ítem es nulo");
-                else
                 {
-                    if (objItem.IdItem == 0)
-                    {
-                         Item query = await GetItemAsync(objItem.Internalcode, objItem.IdCompany).ConfigureAwait(false);
-                        if (query != null)
-                            objResponse.UnsuccessfulResponse(403, "Código existente");
-                    }
-                    else
-                    {
-
-                    }
+                    objResponse.UnsuccessfulResponse(404, "El ítem es nulo.");
+                    return objResponse;
                 }
+
+                Item query = await GetItemAsync(objItem.Internalcode, objItem.IdCompany).ConfigureAwait(false);
+                if (objItem.IdItem == 0 && query != null)
+                {
+                    objResponse.UnsuccessfulResponse(403, "El código del ítem ya existe, por favor ingrese uno nuevo.");
+                    return objResponse;
+                }
+
+                if (string.IsNullOrEmpty(objItem.Name))
+                {
+                    objResponse.UnsuccessfulResponse(403, "Debe ingresar un nombre para el ítem.");
+                    return objResponse;
+                }
+
+                if (objItem.IdBrand == 0)
+                {
+                    objResponse.UnsuccessfulResponse(403, "Debe selecionar una marca.");
+                    return objResponse;
+                }
+
+                if (objItem.CostPrice == 0)
+                {
+                    objResponse.UnsuccessfulResponse(403, "Debe ingresar el precio costo del ítem.");
+                    return objResponse;
+                }
+
+                if (objItem.ProfitPercentage == 0)
+                {
+                    objResponse.UnsuccessfulResponse(403, "Debe ingresar el porcentaje de ganacia del ítem.");
+                    return objResponse;
+                }
+
+                if (objItem.UnitPrice == 0)
+                {
+                    objResponse.UnsuccessfulResponse(403, "No se ha calculado el precio unitario del ítem.");
+                    return objResponse;
+                }
+
+                if (objItem.ProfitPercentage == 0)
+                {
+                    objResponse.UnsuccessfulResponse(403, "No se ha calculado la gancia del ítem.");
+                    return objResponse;
+                }
+
+                if (objItem.ProfitPercentage == 0)
+                {
+                    objResponse.UnsuccessfulResponse(403, "Debe ingresar un precio de venta para el ítem.");
+                    return objResponse;
+                }
+
+                objResponse.SuccessfulResponse(200,"OK");
 
                 return objResponse;
             }
@@ -46,17 +87,27 @@ namespace SaeApp.Business.Modules.Inventory
         /// Registra o modifica un objeto.
         /// </summary>
         /// <returns>Id primario del objeto.</returns>
-        public async Task<int> Guardar(Item objItem)
+        public async Task<Response> Save(Item objItem)
         {
             try
             {
-                // Objeto DAO.
-                ItemDAO objItemDAO = await ItemDAO.Instance;
+                Response objResponse = new Response();
 
-                // Realizamos la operación en la base de datos.              
-                int id = await objItemDAO.SaveItemAsync(objItem);
+                Response objRespPreSave = await PreSave(objItem).ConfigureAwait(false);
+                if (objRespPreSave.Valid)
+                {
+                    // Objeto DAO.
+                    ItemDAO objItemDAO = await ItemDAO.Instance;
 
-                return id;
+                    // Realizamos la operación en la base de datos.              
+                    int id = await objItemDAO.SaveItemAsync(objItem);
+
+                    objResponse.SuccessfulResponse(id, "OK");
+                }
+                else
+                    objResponse.UnsuccessfulResponse(402, objRespPreSave.Message);
+
+                return objResponse;
             }
             catch (Exception e)
             {
@@ -70,7 +121,7 @@ namespace SaeApp.Business.Modules.Inventory
         private void PostGuardar(Item objItem, ItemDAO objItemDAO)
         {
         }
-        
+
         /// <summary>
         /// Elimina registros de la tabla.
         /// </summary>
