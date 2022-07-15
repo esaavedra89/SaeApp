@@ -13,7 +13,8 @@ namespace SaeApp.Model.Modules.Inventory
         public int IdBrand { get; set; }
         public string Supplier { get; set; }
         public string Internalcode { get; set; }
-        public decimal Amount { get; set; }
+        public string Unit { get; set; }
+        public decimal StockQuantity { get; set; }
         public DateTime AdmissionDate { get; set; }
         public DateTime ModificationDate { get; set; }
         public decimal CostPrice { get; set; }

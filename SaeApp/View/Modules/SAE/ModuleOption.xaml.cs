@@ -48,7 +48,7 @@ namespace SaeApp.View.Modules.SAE
                         IdModulo = Resource.ID_RESOURCE_INVENTORY,
                     });
                 }
-                else
+                else if(idResource == Resource.ID_RESOURCE_SELL)
                 {
                     objResourceList.Add(new Resource
                     {

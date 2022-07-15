@@ -51,7 +51,7 @@ namespace SaeApp.View.Modules.SAE
                             break;
                         case Resource.ID_RESOURCE_INVENTORY_INVENTORYMOVEMENT:
                             // Detalle.
-                            this.Detail = new NavigationPage(new ModuleOption(objResource));
+                            this.Detail = new NavigationPage(new MIDetail(objResource, objSelected));
                             break;
 
                         default:

@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SaeApp.View.Modules.Inventory.MIDetail"
+             Title="Detalle de movimiento de inventario">
+    <ContentPage.Content>
+        <AbsoluteLayout
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand">
+            <ScrollView 
+                AbsoluteLayout.LayoutFlags="All" 
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                VerticalOptions="FillAndExpand"
+                BackgroundColor="LightBlue">
+                <StackLayout
+                    HorizontalOptions="CenterAndExpand"
+                    IsEnabled="{Binding IsEnabledPage}"
+                    Margin="5,5,5,0"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout
+                        Margin="5">
+                        <StackLayout
+                            Orientation="Horizontal"
+                            HorizontalOptions="Center">
+                            <ImageButton
+                                Clicked="btnEdit_Clicked"
+                                HorizontalOptions="CenterAndExpand"
+                                Source="ic_create"
+                                x:Name="btnEdit"/>
+                            <ImageButton
+                                Clicked="btnSave_Clicked"
+                                Source="ic_save"
+                                HorizontalOptions="CenterAndExpand"
+                                x:Name="btnSave"/>
+                            <ImageButton
+                                Clicked="btnClose_Clicked"
+                                Source="ic_close"
+                                HorizontalOptions="CenterAndExpand"
+                                x:Name="btnClose"/>
+                        </StackLayout>
+                        <Label 
+                            FontSize="Large"
+                            HorizontalOptions="Start" 
+                            Text="Información"
+                            VerticalOptions="Start"/>
+                        <BoxView
+                            BackgroundColor="LightGray" 
+                            HeightRequest="1" 
+                            HorizontalOptions="FillAndExpand" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Text="Número"
+                                VerticalOptions="CenterAndExpand"/>
+                            <Entry
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand" 
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Placeholder="Código"
+                                Text="{Binding Number}"
+                                x:Name="number"/>
+
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Text="Estado"
+                                VerticalOptions="CenterAndExpand"/>
+                            <Picker
+                                FontSize="Medium"
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                HorizontalOptions="FillAndExpand" 
+                                ItemsSource="{Binding StateEntityList}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding StateEntitySelected}"
+                                Title="Estado"
+                                x:Name="stateEntityList"/>
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="2"
+                                Text="Tipo"
+                                VerticalOptions="StartAndExpand"/>
+                            <Picker
+                                FontSize="Medium"
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                HorizontalOptions="FillAndExpand" 
+                                ItemsSource="{Binding InventoryMovementTypeList}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding InventoryMovementTypeSelected}"
+                                Title="Tipo"
+                                x:Name="inventoryMovementTypeItem"/>
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="3"
+                                Text="Responsable"
+                                VerticalOptions="CenterAndExpand"/>
+                            <Picker
+                                FontSize="Medium"
+                                Grid.Column="1"
+                                Grid.Row="3"
+                                HorizontalOptions="FillAndExpand" 
+                                ItemsSource="{Binding ResponsibleUserList}"
+                                ItemDisplayBinding="{Binding Login}"
+                                SelectedItem="{Binding ResponsibleUserSelected}"
+                                Title="Responsable"
+                                x:Name="responsibleUserList"/>
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="4"
+                                Text="Motivo"
+                                VerticalOptions="CenterAndExpand"
+                                />
+                            <Picker
+                                FontSize="Medium"
+                                Grid.Column="1"
+                                Grid.Row="4"
+                                HorizontalOptions="FillAndExpand" 
+                                ItemsSource="{Binding InventoryMovementMotiveList}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding InventoryMovementMotiveSelected}"
+                                Title="Motivo"
+                                x:Name="inventoryMovementMotiveList"/>
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="5"
+                                Grid.RowSpan="2"
+                                Text="Justificación"
+                                VerticalOptions="CenterAndExpand"/>
+                            <Editor
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand" 
+                                Grid.Column="1"
+                                Grid.Row="5"
+                                Grid.RowSpan="2"
+                                Placeholder="Justificación"
+                                Text="{Binding Comments}"
+                                x:Name="profitPercentage"/>
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="7"
+                                Text="fecha de registro"
+                                VerticalOptions="CenterAndExpand"/>
+                            <DatePicker
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand" 
+                                Grid.Column="1"
+                                Grid.Row="7"
+                                Date="{Binding AdmissionDate}"
+                                x:Name="admissionDate"/>
+                            <Label 
+                                FontSize="Medium"
+                                HorizontalOptions="Start" 
+                                Grid.Column="0"
+                                Grid.Row="8"
+                                Text="última modificación"
+                                VerticalOptions="CenterAndExpand"/>
+                            <DatePicker
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand" 
+                                Grid.Column="1"
+                                Grid.Row="8"
+                                Date="{Binding ModificationDate}"
+                                x:Name="modificationDate"/>
+                        </Grid>
+                        <StackLayout
+                            Margin="0,10">
+                            <Label 
+                                FontSize="Large"
+                                HorizontalOptions="Start" 
+                                Text="Ítems"
+                                VerticalOptions="Start"/>
+                            <BoxView
+                                BackgroundColor="LightGray" 
+                                HeightRequest="1" 
+                                HorizontalOptions="FillAndExpand" />
+                            <Grid
+                                BackgroundColor="LightPink"
+                                Margin="0"
+                                Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                               
+                                <Label 
+                                    FontSize="Medium"
+                                    HorizontalOptions="Center" 
+                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    Text="Ítem"
+                                    VerticalOptions="CenterAndExpand"/>
+                                <Label 
+                                    FontSize="Medium"
+                                    HorizontalOptions="Center" 
+                                    Grid.Column="2"
+                                    Grid.Row="0"
+                                    Text="Peso T."
+                                    VerticalOptions="CenterAndExpand"/>
+                                <Label 
+                                    FontSize="Medium"
+                                    HorizontalOptions="Center" 
+                                    Grid.Column="3"
+                                    Grid.Row="0"
+                                    Text="Uni"
+                                    VerticalOptions="CenterAndExpand"/>
+                                <Label 
+                                    FontSize="Medium"
+                                    HorizontalOptions="Center" 
+                                    Grid.Column="4"
+                                    Grid.Row="0"
+                                    Text="Costo T."
+                                    VerticalOptions="CenterAndExpand"/>
+                            </Grid>
+                            <ListView
+                                BackgroundColor="LightGreen"
+                                CachingStrategy="RecycleElementAndDataTemplate"
+                                HasUnevenRows="True"
+                                HeightRequest="300"
+                                Margin="5,0"
+                                SeparatorColor="#910b20"
+                                SeparatorVisibility="Default"
+                                VerticalOptions="FillAndExpand"
+                                x:Name="inventoryMovementList"
+                                ItemsSource="{Binding InventoryMovementItemList}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid
+                                                RowSpacing="1"
+                                                VerticalOptions="CenterAndExpand">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.2*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Grid.Column="0"
+                                                    Grid.Row="0"
+                                                    Grid.RowSpan="2"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    LineBreakMode="TailTruncation"
+                                                    Margin="0"
+                                                    Text="{Binding Position}"
+                                                    TextColor="Black"
+                                                    VerticalTextAlignment="Center"
+                                                    VerticalOptions="CenterAndExpand">
+                                                </Label>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Grid.Column="1"
+                                                    Grid.ColumnSpan="4"
+                                                    Grid.Row="0"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    LineBreakMode="TailTruncation"
+                                                    Margin="0"
+                                                    Text="{Binding Item.Name}"
+                                                    TextColor="Black"
+                                                    VerticalTextAlignment="Center"
+                                                    VerticalOptions="CenterAndExpand">
+                                                    <Label.FontSize>
+                                                        <OnIdiom
+                                                        x:TypeArguments="x:Double"
+                                                        Phone="17"
+                                                        Tablet="18"/>
+                                                    </Label.FontSize>
+                                                </Label>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Grid.Column="2"
+                                                    Grid.Row="1"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    LineBreakMode="TailTruncation"
+                                                    Margin="0"
+                                                    Text="{Binding Amount, StringFormat='{0:N2}'}"
+                                                    TextColor="Black"
+                                                    VerticalTextAlignment="Center"
+                                                    VerticalOptions="CenterAndExpand">
+                                                </Label>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Grid.Column="3"
+                                                    Grid.Row="1"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    LineBreakMode="TailTruncation"
+                                                    Margin="0"
+                                                    Text="{Binding Item.Unit}"
+                                                    TextColor="Black"
+                                                    VerticalTextAlignment="Center"
+                                                    VerticalOptions="CenterAndExpand">
+                                                </Label>
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    Grid.Column="4"
+                                                    Grid.Row="1"
+                                                    HorizontalOptions="End"
+                                                    LineBreakMode="TailTruncation"
+                                                    Margin="0"
+                                                    Text="{Binding TotalCost, StringFormat='{0:N2}'}"
+                                                    TextColor="Black"
+                                                    VerticalTextAlignment="Center"
+                                                    VerticalOptions="CenterAndExpand">
+                                                </Label>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+                IsVisible="{Binding Busy}" 
+                Padding="12"
+                x:Name="busy">
+                <Image
+                    HeightRequest="70"
+                    Source="ic_autorenew.png"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

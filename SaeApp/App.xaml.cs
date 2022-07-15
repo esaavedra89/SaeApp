@@ -8,6 +8,9 @@ namespace SaeApp
     {
         /// </summary>
         public static MasterDetailPage MasterD { get; set; }
+
+        public int IdResource { get; set; }
+
         public App()
         {
             InitializeComponent();

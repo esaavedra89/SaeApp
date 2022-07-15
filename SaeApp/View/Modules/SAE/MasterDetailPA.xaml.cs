@@ -1,6 +1,7 @@
 ﻿using SaeApp.Model.Modules.System.Secutiry;
 using SaeApp.Resources;
 using SaeApp.View.Modules.Inventory;
+using SaeApp.View.Modules.Sell;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -51,7 +52,7 @@ namespace SaeApp.View.Modules.SAE
                             break;
                         case Resource.ID_RESOURCE_INVENTORY_INVENTORYMOVEMENT:
                             // Detalle.
-                            this.Detail = new NavigationPage(new ModuleOption(objResource));
+                            this.Detail = new NavigationPage(new InventoryMovementPA(objResource));
                             break;
 
                         default:
@@ -65,7 +66,7 @@ namespace SaeApp.View.Modules.SAE
                     {
                         case Resource.ID_RESOURCE_SELL_INVOICE:
                             // Detalle.
-                            this.Detail = new NavigationPage(new ModuleOption(objResource));
+                            this.Detail = new NavigationPage(new InvoicePA(objResource));
                             break;
                         case Resource.ID_RESOURCE_SELL_DELIVERYNOTE:
                             // Detalle.
