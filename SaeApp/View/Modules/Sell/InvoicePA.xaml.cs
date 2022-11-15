@@ -1,4 +1,7 @@
-﻿using SaeApp.Model.Modules.System.Secutiry;
+﻿using SaeApp.Business.Modules.Inventory;
+using SaeApp.Model.Modules.Inventory;
+using SaeApp.Model.Modules.System.Secutiry;
+using SaeApp.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
